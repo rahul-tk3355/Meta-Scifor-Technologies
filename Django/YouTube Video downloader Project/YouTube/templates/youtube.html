@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>YouTube video downloader</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        
+    </style>
+    </head>
+    <body>
+        <div class="container my-4">
+    
+            <h1>Youtube video downloader</h1>
+            <form method="post" action="">
+                {% csrf_token %}
+                  <label for="link" class="form-label">Enter URL:</label>
+                  <input type="text" class="form-control" name="link" id="link"><br><br>
+                  <button>Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
+            

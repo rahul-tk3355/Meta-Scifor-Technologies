@@ -1,0 +1,52 @@
+body{
+    background-color: grey;
+}
+nav{
+    background-color: black;
+    width: 100vw;
+    height:10vh;
+}
+
+nav ul li{
+    display: inline-block;
+    color: white;
+    padding: 30px;
+    font-size: 18px;
+    animation: 0.5ms;
+}
+nav ul li:hover{
+    color: red;
+    cursor:pointer;
+}
+button{
+    float: right;
+    margin: 25px;
+    font-size: 15px;
+    cursor:pointer
+}
+button:hover{
+    background-color: greenyellow;
+}
+main {
+    padding: 20px;
+    font-size: 20px;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+p{
+    color: white;
+}
+h2{
+    color:yellow;
+    font-size: 30px;
+}
+
+
+
