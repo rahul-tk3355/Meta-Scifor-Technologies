@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .resources-background {
+        background-image: url("{% static 'images/img-9.png' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 20px;
+        min-height: 100vh; 
+    }
+    .list-group-item {
+        background-color: rgba(255, 255, 255, 0.8); 
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container resources-background mt-5">
+    <div class="card shadow-lg">
+        <h1 class="text-center" style="margin-top: 20px;">Resources</h1>
+        <ul class="list-group">
+            {% for resource in resources %}
+                <li class="list-group-item">
+                    <strong>{{ resource.title }}</strong>: 
+                    <a href="{{ resource.link }}" target="_blank">{{ resource.link }}</a> 
+                    <p>{{ resource.description }}</p>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No resources available.</li>
+            {% endfor %}
+    </div> </ul>
+</div>
+{% endblock %}

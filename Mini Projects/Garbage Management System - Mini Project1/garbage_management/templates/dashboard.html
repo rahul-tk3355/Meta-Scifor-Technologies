@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garbage Management Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header class="bg-success text-white text-center py-4">
+        <h1 class="display-4">Garbage Management Dashboard</h1>
+    </header>
+
+    <div class="container mt-5">
+        {% if warning_message %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ warning_message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="card-title">Add New Bin</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ bin_form.as_p }}
+                            <button type="submit" name="add_bin" class="btn btn-primary">Add Bin</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="card-title">Add New Collection</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ collection_form.as_p }}
+                            <button type="submit" name="add_collection" class="btn btn-primary">Add Collection</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="card-title">Bins</h4>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for bin in bins %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ bin.location }} - {{ bin.current_fill }}/{{ bin.capacity }} ({{ bin.fill_percentage }}%)
+                                {% if bin.fill_percentage > 80 %}
+                                    <span class="badge badge-danger">Warning: Near capacity</span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="card-title">Recent Collections</h4>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for collection in collections %}
+                            <li class="list-group-item">
+                                Bin: {{ collection.bin.location }} | Date: {{ collection.collection_date|date:"d-m-Y" }} | Collected Amount: {{ collection.collected_amount }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

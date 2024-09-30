@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <li class="{% if current_page == 'home'%}active{% endif %}">
+                <a href="/">Home</a>
+            </li>
+            <li class="{% if current_page == 'about'%}active{% endif %}">
+                <a href="/about">About</a>
+            </li>
+            <li class="{% if current_page == 'projects'%}active{% endif %}">
+                <a href="/projects">Projects</a>
+            </li>
+            <li class="{% if current_page == 'contact'%}active{% endif %}">
+                <a href="/contact">Contact</a>
+            </li>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+    </footer>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
+   
+

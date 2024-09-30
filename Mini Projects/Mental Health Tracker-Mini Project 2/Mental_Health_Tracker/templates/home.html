@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .carousel-caption {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 10px;
+        width: 70%; 
+        margin: 1.5rem;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .carousel-caption h1, .carousel-caption p {
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-item img {
+        object-fit: cover;
+        height: 70vh; 
+    }
+
+    .feature-icon {
+        font-size: 2rem;
+        padding: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .feature-item h3 {
+        font-weight: bold;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        font-size: 1.75rem; 
+    }
+
+    .feature-description {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+
+    .feature-item:hover .feature-icon {
+        background-color: #007bff; 
+        color: white;
+        transform: scale(1.1); 
+    }
+
+    .feature-item:hover h3 {
+        color: #007bff; 
+    }
+
+    .feature-item:hover .feature-description {
+        color: #343a40; 
+    }
+</style>
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="max-height: 70vh; overflow: hidden; margin-top: 70px;">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'images/img-12.webp' %}" class="d-block w-100" alt="home page" style="object-fit: cover; height: 60vh;">
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 text-center">
+                <h1 class="display-5 fw-bold text-light text-shadow">Welcome to Your Mental Health Tracker</h1>
+                <p class="lead text-light text-shadow">Track moods, therapy sessions, and explore curated resources for better mental well-being.</p>
+                <a href="{% url 'mood_entries' %}" class="btn btn-outline-light btn-lg mt-3">Get Started</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/img-3.jpg' %}" class="d-block w-100" alt="Mood Tracker" style="object-fit: cover; height: 60vh;">
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 text-center">
+                <h1 class="display-5 fw-bold text-light text-shadow">Track Your Mood</h1>
+                <p class="lead text-light text-shadow">Monitor and analyze your mood trends over time.</p>
+                <a href="{% url 'mood_entries' %}" class="btn btn-outline-light btn-lg">Start Tracking</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/pic.avif' %}" class="d-block w-100" alt="Therapy Sessions" style="height: 60vh;">
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 text-center">
+                <h1 class="display-5 fw-bold text-light text-shadow">Therapy Sessions</h1>
+                <p class="lead text-light text-shadow">Record and review your therapy sessions for better self-awareness.</p>
+                <a href="{% url 'therapy_sessions' %}" class="btn btn-outline-light btn-lg">Learn More</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/img-1.jpg' %}" class="d-block w-100" alt="Helpful Resources" style="height: 60vh;">
+            <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 text-center">
+                <h1 class="display-5 fw-bold text-light text-shadow">Helpful Resources</h1>
+                <p class="lead text-light text-shadow">Access carefully curated mental health resources for better management.</p>
+                <a href="{% url 'resources' %}" class="btn btn-outline-light btn-lg">Explore Now</a>
+        </div>
+    </div>
+    
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+</div>
+
+<div class="container features mt-5">
+    <div class="row text-center">
+        <div class="col-md-4 feature-item">
+            <div class="feature-icon bg-info text-white rounded-circle mb-3 d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                <i class="fas fa-calendar-day fa-2x"></i>
+            </div>
+            <h3 class="feature-title">Daily Mood Tracking</h3>
+            <p class="feature-description">Track your mood every day and monitor your mental health trends.</p>
+        </div>
+        <div class="col-md-4 feature-item">
+            <div class="feature-icon bg-success text-white rounded-circle mb-3 d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                <i class="fas fa-clipboard-list fa-2x"></i>
+            </div>
+            <h3 class="feature-title">Therapy Sessions</h3>
+            <p class="feature-description">Document and review your therapy sessions for better self-awareness.</p>
+        </div>
+        <div class="col-md-4 feature-item">
+            <div class="feature-icon bg-secondary text-white rounded-circle mb-3 d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                <i class="fas fa-book-open fa-2x"></i>
+            </div>
+            <h3 class="feature-title">Helpful Resources</h3>
+            <p class="feature-description">Access curated resources to support your mental health journey.</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}
+
+

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .mood-tracker {
+        background-image: url("{% static 'images/img-4.png' %}");
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat;
+        padding: 20px; 
+        border-radius: 10px;
+        min-height: 100vh; 
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.8); 
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-title {
+        color: #333;
+    }
+
+    .list-group-item {
+        border: none;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .badge-info {
+        background-color: #17a2b8;
+        color: white;
+    }
+</style>
+<div class="container mood-tracker mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h1 class="text-center mb-4 mt-4">Mood Tracker</h1>
+
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Add a New Mood Entry</h2>
+                    <form method="post" class="mt-4">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Add Mood Entry</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Your Mood Entries</h2>
+                    {% if entries %}
+                        <ul class="list-group mt-4">
+                            {% for entry in entries %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>{{ entry.date }}:</strong> 
+                                        {{ entry.mood }} 
+                                        {% if entry.mood == "Happy" %}
+                                            😊
+                                        {% elif entry.mood == "Angry" %}
+                                            😠
+                                        {% elif entry.mood == "Sad" %}
+                                            😢
+                                        {% elif entry.mood == "Excited" %}
+                                            😃
+                                        {% elif entry.mood == "Frustrated" %}
+                                            😤
+                                        {% elif entry.mood == "Bored" %}
+                                            😐
+                                        {% else %}
+                                            😶 
+                                        {% endif %}
+                                        <br>
+                                        <small>{{ entry.notes }}</small>
+                                    </div>
+                                    <span class="badge badge-pill badge-info">{{ entry.mood }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-center mt-4">No mood entries yet. Start tracking your moods now!</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
