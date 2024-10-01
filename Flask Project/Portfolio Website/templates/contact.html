@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Contact Me{% endblock %}
+{% block body %}
+    <h1>Contact Me</h1>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" style="margin:20px 0; width:30vh; height:5vh; border-radius:10px;"><br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" style="margin:20px 0; width:30vh;  height:5vh; border-radius:10px;"><br>
+        <label for="message">Message:</label>
+        <textarea name="message" id="message" style="margin:15px 0; width:30vh; border-radius:10px;" rows="6"></textarea><br><br>
+        <button type="submit">Send</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: grey;
+}
+nav{
+    background-color: #333;
+    padding: 1rem;
+    text-align: center;
+  
+}
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+   
+}
+nav ul li a{
+    color: white;
+    text-decoration: none;
+
+}
+nav ul li a:hover{
+    color: aqua;
+}
+.container{
+    text-align: center;
+    padding: 10vh;
+    
+}
+h1 {
+    color: rgb(8, 61, 64);
+    font-size: 2.5rem;
+}
+button {
+    margin-left: 50px;
+    background-color: #3f6d86;
+    color: white;
+    border: 1px solid brown;
+    cursor: pointer;
+    padding:10px 40px;
+    border-radius: 10px;
+}
+button:hover {
+    background-color: #555;
+}
+p{
+    font-size: 20px;
+}
