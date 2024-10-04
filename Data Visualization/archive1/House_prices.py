@@ -12,19 +12,18 @@ from sklearn.metrics import mean_squared_error
 df = pd.read_csv('HousingData.csv')
 
 # preprocessing the dataset
-# print(df.isnull().sum())
-df[['CRIM', 'AGE', 'LSTAT']] = df[['CRIM', 'AGE', 'LSTAT']].fillna(df[['CRIM', 'AGE', 'LSTAT']].mean())  # fills CRIM and AGE cols. when you are reassigning the df[['CRIM', 'AGE']] directly to df[['CRIM', 'AGE']] again, no need to give "inplace=True". The original DataFrame automatically gets updated.
-df = df.drop(['ZN', 'CHAS'], axis=1)  # drop 'ZN' and "CHAS" columns
+df[['CRIM', 'AGE', 'LSTAT']] = df[['CRIM', 'AGE', 'LSTAT']].fillna(df[['CRIM', 'AGE', 'LSTAT']].mean()) 
+df = df.drop(['ZN', 'CHAS'], axis=1)  
 df['INDUS'] = df['INDUS'].bfill()
 
 # Define X (features) and y (target)
-X = df.drop('MEDV', axis=1)  # taking all the columns as features except MEDV column. So dropping it.
-y = df['MEDV'] # target 
+X = df.drop('MEDV', axis=1)  
+y = df['MEDV'] 
 
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.2, random_state=42)
 
-# initailize the model object from LinearRegression class (house prices prediction)
+# initailize the model object from LinearRegression class
 model = LinearRegression()
 
 # training the model
@@ -34,18 +33,18 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 # evaluate the model
-mse = mean_squared_error(y_pred, y_test) #here actual value(y_test) is compared with predicted values(y_pred)
+mse = mean_squared_error(y_pred, y_test) 
 print(f'Mean Squared Error: {mse:.2f}')
 
 # Create a DataFrame for analyzing actual vs predicted values
 comparison_df = pd.DataFrame({
     'Actual price': y_test, 
-    'Predicted price': y_pred}).reset_index(drop=True)  # to display rows from 0 index number 
+    'Predicted price': y_pred}).reset_index(drop=True)  
 
-print(comparison_df.head()) # only top 5 rows.
+print(comparison_df.head()) 
 
 # visualize using seaborn
-plt.figure(figsize=(8, 6))  # figure size = 8 inches width, 6 inches height
+plt.figure(figsize=(8, 6))  
 sns.scatterplot(x='Actual price', y='Predicted price', data=comparison_df)
 plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color='red', linestyle='--', linewidth=2)
 plt.title('Actual vs Predicted Prices (Linear Regression)')
@@ -53,16 +52,13 @@ plt.xlabel('Actual Price')
 plt.ylabel('Predicted Price')
 plt.show()
 
-# the lower the mse value is , better is the model performance . It means that predicted values are much closer to the actual values of the model.
-# the higher the mse value is, lower is the model performance.
-
 # TensorFlow Neural Network Model
 
 model = models.Sequential([
-    layers.Dense(64, activation='relu', input_shape=(X_train.shape[1],)),  # Input layer
-    layers.Dense(64, activation='relu'),  # Hidden layer
-    layers.Dense(32, activation='relu'),  # Hidden layer
-    layers.Dense(1)  # Output layer for regression (no activation function)
+    layers.Dense(64, activation='relu', input_shape=(X_train.shape[1],)),  
+    layers.Dense(64, activation='relu'),  
+    layers.Dense(32, activation='relu'),  
+    layers.Dense(1)  
 ])
 
 #compile model
