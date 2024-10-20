@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mb-5 py-5"> 
+    <h1 class="text-center text-dark">SMART GARBAGE MANAGEMENT SYSTEM</h1>
+    <p class="text-center text-black mb-5 my-4" style="font-size: 1.2rem; color:red;">Effortlessly manage your waste with our intuitive platform designed to streamline bin management, collections, and maintenance logs.</p>
+
+    <div class="row text-center">
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm card-hover d-flex flex-column" style="height: 100%; transform: scale(0.95); transition: transform 0.3s;">
+                <div class="card-header bg-info text-black" style="font-size:1.8rem;">📦 Manage Bin Types</div>
+                <div class="card-body flex-grow-1 d-flex flex-column justify-content-between" style="font-size: 1.3rem;">
+                    <p>Classify your waste bins into various categories. Define and manage bin types based on waste categories for better recycling and waste management.</p>
+                    <a class="btn btn-info btn-lg" href="{% url 'bin_type_list' %}">View Bin Types</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3"> 
+            <div class="card shadow-sm card-hover d-flex flex-column" style="height: 100%; transform: scale(0.95); transition: transform 0.3s;">
+                <div class="card-header bg-secondary text-black" style="font-size:1.8rem;">🔍 Manage Bins</div>
+                <div class="card-body flex-grow-1 d-flex flex-column justify-content-between" style="font-size: 1.3rem;">
+                    <p>Keep your community clean by monitoring and updating the status of your waste bins in real-time. Ensure timely collections and optimal bin placement.</p>
+                    <a class="btn btn-secondary btn-lg" href="{% url 'bin_list' %}">View Bins</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm card-hover d-flex flex-column" style="height: 100%; transform: scale(0.95); transition: transform 0.3s;">
+                <div class="card-header bg-success text-black" style="font-size:1.8rem;">📅 Manage Collections</div>
+                <div class="card-body flex-grow-1 d-flex flex-column justify-content-between" style="font-size: 1.3rem;">
+                    <p>Schedule and track your waste collection services efficiently. Stay informed with collection timelines to maintain cleanliness in your area.</p>
+                    <a class="btn btn-success btn-lg" href="{% url 'collection_list' %}">View Collections</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm card-hover d-flex flex-column" style="transform: scale(0.95); transition: transform 0.3s;">
+                <div class="card-header bg-danger text-black" style="font-size:1.8rem;">🔧 Manage Maintenance Logs</div>
+                <div class="card-body flex-grow-1 d-flex flex-column justify-content-between" style="font-size: 1.3rem;">
+                    <p>Document and access maintenance records to ensure that your bins are always in optimal condition. Improve the longevity and functionality of your management system.</p>
+                    <a class="btn btn-danger btn-lg" href="{% url 'maintenance_log_list' %}">View Maintenance Logs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+        

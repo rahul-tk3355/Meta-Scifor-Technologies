@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Bins List{% endblock %}
+
+{% block content %}
+<div class="container mt-3 py-5">
+    <h1 class="text-center text-dark">Bins Management</h1>
+    <p class="text-center text-active mb-4 my-4" style="font-size: 1.3rem; color:red;">Monitor and manage the bins effectively with real-time data on capacity and fill levels.</p>
+
+    <div class="text-center mb-4">
+        <a class="btn btn-primary btn-lg" href="{% url 'create_bin' %}">Add New Bin</a>
+        <a class="btn btn-primary btn-lg ml-2" href="{% url 'bin_chart' %}">View Bin Chart</a> 
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered shadow-lg" style="background-color: #f8f9fa;">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>Location</th>
+                    <th>Capacity (Litres)</th>
+                    <th>Current Fill (Litres)</th>
+                    <th>Type</th>
+                    <th>Fill Percentage</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bin in bins %}
+                <tr class="text-center">
+                    <td>{{ bin.location }}</td>
+                    <td>{{ bin.capacity }}</td>
+                    <td>{{ bin.current_fill }}</td>
+                    <td>{{ bin.bintype.name }}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar 
+                                {% if bin.fill_percentage < 50 %}
+                                    bg-success
+                                {% elif bin.fill_percentage < 75 %}
+                                    bg-warning
+                                {% else %}
+                                    bg-danger
+                                {% endif %}"
+                                role="progressbar" style="width: {{ bin.fill_percentage }}%" aria-valuenow="{{ bin.fill_percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                {{ bin.fill_percentage|floatformat:2 }}%
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="{% url 'update_bin' bin.id %}">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'delete_bin' bin.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+</div>
+{% endblock %}

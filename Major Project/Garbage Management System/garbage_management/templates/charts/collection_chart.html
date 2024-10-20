@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Collection Schedule Chart{% endblock %}
+
+{% block content %}
+<style>
+    #collectionChart {
+        width: 100% !important; 
+        height: 100%; 
+    }
+
+    @media (max-width: 576px) {
+        #collectionChart {
+            height: 400px; 
+        }
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center" style="margin-top: 100px;">Collection Schedule Over Time</h1>
+    <div class="my-4">
+        <canvas id="collectionChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById('collectionChart').getContext('2d');
+    var collectionChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ dates|safe }},
+            datasets: [{
+                data: {{ collected_amounts|safe }},
+                backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Collected Amount (Litres)',
+                        color: 'black',
+                        font: {
+                            size: 20, 
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: 16
+                        },
+                        color: 'black',
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Collection Dates',
+                        color: 'black',
+                        font: {
+                            size: 20, 
+                        }
+                    },
+                    ticks: {
+                        font: {
+                            size: 16
+                        },
+                        color: 'black',
+                    }
+                },
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>
+<br><br>
+{% endblock %}

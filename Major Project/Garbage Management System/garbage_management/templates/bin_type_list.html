@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Bin Types{% endblock %}
+
+{% block content %}
+<div class="container mt-3 py-5">
+    <h1 class="text-center text-dark">Bin Types</h1>
+    <p class="text-center text-active mb-4 my-4" style="font-size: 1.3rem; color:red;">Manage and categorize the different types of bins.</p>
+
+    <div class="text-center mb-4">
+        <a class="btn btn-primary btn-lg" href="{% url 'create_bin_type' %}">Add New Bin Type</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered shadow-lg" style="background-color: #f8f9fa;">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>Type Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bintype in bintypes %}
+                <tr class="text-center align-middle">
+                    <td>{{ bintype.name }}</td>
+                    <td>{{ bintype.description }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="{% url 'update_bin_type' bintype.id %}">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'delete_bin_type' bintype.id %}">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+</div>
+{% endblock %}

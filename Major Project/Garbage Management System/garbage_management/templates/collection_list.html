@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Collection Schedule{% endblock %}
+
+{% block content %}
+<div class="container mt-3 py-5">
+    <h1 class="text-center text-dark">Collection Schedule Management</h1>
+    <p class="text-center text-active mb-4 my-4" style="font-size: 1.3rem; color:red;">Manage and monitor the collection schedule for bins effectively.</p>
+
+    <div class="text-center mb-4">
+        <a class="btn btn-primary btn-lg" href="{% url 'create_collection' %}">Add New Collection</a>
+        <a class="btn btn-primary btn-lg ml-2" href="{% url 'collection_chart' %}">View Collection Chart</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered shadow-lg" style="background-color: #f8f9fa;">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>Bin Location</th>
+                    <th>Collection Date</th>
+                    <th>Collected Amount (Litres)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for collection in collections %}
+                <tr class="text-center">
+                    <td>{{ collection.bin.location }}</td>
+                    <td>{{ collection.collection_date }}</td>
+                    <td>{{ collection.collected_amount }}</td>
+                    <td>
+                        <a class="btn btn-info btn-sm" href="{% url 'update_collection' collection.id %}">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'delete_collection' collection.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+</div>
+{% endblock %}
